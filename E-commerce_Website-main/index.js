@@ -1,13 +1,7 @@
 
-
-const supabaseUrl = 'https://zqhjkuugezjcpnfxppfw.supabase.co/rest/v1/';
-const supabaseKey = sb_secret_d2_mriOj7DnWKjoxuFmJKw_Qg60aqR6;
-const supabaseKey_public = sb_publishable_UDQfHrnG5GTfoMgsfHSzpg_y00vskdY;
-const supabase = createClient(supabaseUrl, supabaseKey);
-
 async function gettable() {
   // PHP의 "SELECT * FROM users"와 같은 역할입니다.
-  const { data, error } = await supabase
+  let { data: data, error } = await supabase
     .from('test1')
     .select('*')
 
