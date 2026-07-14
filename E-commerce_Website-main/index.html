@@ -1,24 +1,15 @@
-<?php
-    session_start();
-    setcookie($user_id, "null");
-    setcookie($user_number, "null");
-    $msg = "none";
-    setcookie($valid, "false");
-    setcookie($timeout, "0");
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PrunePlume - First eCommerce Website</title>
 
     <!--Linking css file-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 
     <!--- favicon -->
-    <link rel="shortcut icon" href="./assets/images/logo/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/Products/images/logo/favicon.ico" type="image/x-icon">
     <!--- google font link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,11 +17,12 @@
         rel="stylesheet">
     
     <!---- coonect Database ---->
-    <link href="./connect.php">
-    <link href="./user.php">
+    <link href="/connect.php">
 
-    <!---adsense---->
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6382505542430824"
+    <!--- connect supabase-->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!----adsense-->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6382505542430824"
      crossorigin="anonymous"></script>
     
     
@@ -39,7 +31,7 @@
 
     <!-------Top Navigation-------->
     <div class="top_nav">
-        <div class="container top_nav_container">
+        <div class="max_width_114rem top_nav_container">
             <div class="top_nav_wrap">
             <p class="top_nav_p">
             </p>
@@ -48,307 +40,55 @@
     </div>
 
     <!-------Main Navigation-------->
-    <nav class="nav" aria-label="nav">
-        <div class="container nav_container display_flex">
-            <a href="index.html" class="nav_logo">VeriMediRX</a>
+    <nav class="nav padding_inline_7vmin" aria-label="nav">
+        <div class="nav_container display_flex">
+            <a href="/index.html" class="nav_logo">VeriMediRX</a>
             <ul class="display_flex">
-                <li class="nav_item"><a href="index.html" class="nav_link">Home</a></li>
-                <li class="nav_item"><a href="#" class="nav_link">About Us</a></li>
-                <li class="nav_item"><a href="#" class="nav_link">Contact</a></li>
-                <li class="nav_item" id="user_id"><a href="sign_up.html" class="nav_link">Sign Uphtml</a></li>
-                <li class="nav_item"><a href="cart.html" class="nav_link">Cart</a></li>
+                <li class="nav_item"><a href="/index.html" class="nav_link">Home</a></li>
+                <li class="nav_item" id="main_user_id"><a href="/log_in.html" class="nav_link">Log in</a></li>
+                <li class="nav_item"><a href="/cart.html" class="nav_link">Cart</a></li>
             </ul>
         </div>
     </nav>
 
 
-    <!-------Mobile Nav-------->
-    <nav class="mob_nav display_none" aria-label="mob_nav">
-        <ul class="mob_list">
-            <li class="mob_item"><a href="index.html" class="mob_link">Home</a></li>
-            <li class="mob_item"><a href="#" class="mob_link">About Us</a></li>
-            <li class="mob_item"><a href="#" class="mob_link">Contact</a></li>
-            <li class="mob_item"><a href="sign_up.html" class="mob_link">Sign Up mob</a></li>
-            <li class="mob_item"><a href="cart.html" class="mob_link">Cart</a></li>
-        </ul>
-        
-    </nav>
-
-
     <!-------left aside-------->
-    <aside>
-        <div class="container header_container">
+    <aside class="padding_inline_7vmin display_none">
+        <div class="container_basic header_container">
             <div class="header_filter">
-                <a href="/Products/product_1.html" class="filter_link"> 탈모약 </a>
-                <a href="/Products/product_2.html" class="filter_link"> 여성호르몬, 피임약</a>
+                <a href="/Products/Category/mans_health.html?category=hairmed" class="text_black">man's health </a>
+                <a href="/Products/Category/womens_health.html?category=hairmed" class="text_black">women's health</a>
+                <a href="/Products/Category/meds_other.html?category=hairmed" class="text_black">meds & other</a>
             </div>
         </div>
     </aside>
 
     <!-----Categories----->
-    <section class="container">
-        <p class="category_p">Categories</p>
+    <section class="max_width_114rem padding_inline_7vmin">
+        <p class="category_p margin_top_5vmin margin_left_1vmin">Categories</p>
         <div class="section_title display_flex">
             <h2>Browse by Categories</h2>
         </div>
-        <div class="categories">
-            <div class="categ"><i class="fa-solid fa-headphones fa-3x" class="categ_icon"></i> <p class="categ_name">Headphones</p></div>
-            <div class="categ"><i class="fa-solid fa-gamepad fa-3x" class="categ_icon"></i> <p class="categ_name">Gmaepad</p></div>
-            <div class="categ"><i class="fa-solid fa-mobile fa-3x" class="categ_icon"></i> <p class="categ_name">Mobiles</p></div>
-            <div class="categ"><i class="fa-solid fa-couch fa-3x" class="categ_icon"></i> <p class="categ_name">Furniture</p></div>
-            <div class="categ"><i class="fa-solid fa-camera-retro fa-3x" class="categ_icon"></i> <p class="categ_name">Camera</p></div>
-            <div class="categ"><i class="fa-solid fa-laptop fa-3x" class="categ_icon"></i> <p class="categ_name">Laptops</p></div>
+        <div class="categories display_flex">
+            <a class = "categ_name text_black" href="/Products/hairmeds.html?category=hairmed"><div class="categ">득모상품</div></a>
+            <a class = "categ_name text_black" href="/Products/hairmeds.html?category=hairmed"><div class="categ">전체상품</div></a>
         </div>
     </section>
     
 
     <!-- Products -->
-    <section class="container">
-        <p class="category_p">Most Searched deals</p>
+    <section class="max_width_114rem padding_inline_7vmin">
+        <p class="category_p margin_top_5vmin margin_left_1vmin">Most Searched deals</p>
         <div class="section_title display_flex">
             <h2>Best selling Products</h2>
         </div>
-        <div class="products_list">
-            <div class="card">
-                <div class="card_area">
-                    <img src="Products/P1.jpg" alt="" class="card_image">
-                    <div class="card_icons">
-                        <i class="fa-regular fa-heart" class="hrt"></i>
-                        <i class="fa-regular fa-eye" class="eye"></i>
-                    </div>
-                </div>
-                <div class="card_body">
-                    <h3 class="card_title">Roller Scates</h3>
-                    <p class="price">₹2999</p>
-                    <div class="ratings">
-                        <div class="rating_stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="rating_numbers">(230)</p>
-                    </div>
-                    <button class="add_cart"
-                    product_number="P1"
-                    product_name="Roller Scates"
-                    product_image="Products/P1.jpg"
-                    product_price="2999"
-                    >Add to Cart</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card_area">
-                    <img src="Products/P2.jpg" alt="" class="card_image">
-                    <div class="card_icons">
-                        <i class="fa-regular fa-heart" class="hrt"></i>
-                        <i class="fa-regular fa-eye" class="eye"></i>
-                    </div>
-                </div>
-                <div class="card_body">
-                    <h3 class="card_title">Puffer Jackets</h3>
-                    <p class="price">₹999</p>
-                    <div class="ratings">
-                        <div class="rating_stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="rating_numbers">(325)</p>
-                    </div>
-                    <button class="add_cart"
-                    product_number="P2"
-                    product_name="Puffer Jackets"
-                    product_image="Products/P2.jpg"
-                    product_price="999"
-                    >Add to Cart</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card_area">
-                    <img src="Products/P3.jpg" alt="" class="card_image">
-                    <div class="card_icons">
-                        <i class="fa-regular fa-heart" class="hrt"></i>
-                        <i class="fa-regular fa-eye" class="eye"></i>
-                    </div>
-                </div>
-                <div class="card_body">
-                    <h3 class="card_title">Maui Moisture</h3>
-                    <p class="price">₹599</p>
-                    <div class="ratings">
-                        <div class="rating_stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="rating_numbers">(540)</p>
-                    </div>
-                    <button class="add_cart"
-                    product_number="P3"
-                    product_name="Maui Moisture"
-                    product_image="Products/P1.jpg"
-                    product_price="599"
-                    >Add to Cart</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card_area">
-                    <img src="Products/P4.jpg" alt="" class="card_image">
-                    <div class="card_icons">
-                        <i class="fa-regular fa-heart" class="hrt"></i>
-                        <i class="fa-regular fa-eye" class="eye"></i>
-                    </div>
-                </div>
-                <div class="card_body">
-                    <h3 class="card_title">Edura Facial Set</h3>
-                    <p class="price">₹1299</p>
-                    <div class="ratings">
-                        <div class="rating_stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="rating_numbers">(380)</p>
-                    </div>
-                    <button class="add_cart"
-                    product_number="P4"
-                    product_name="Edura Facial Set"
-                    product_image="Products/P4.jpg"
-                    product_price="1299"
-                    >Add to Cart</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card_area">
-                    <img src="Products/P5.jpg" alt="" class="card_image">
-                    <div class="card_icons">
-                        <i class="fa-regular fa-heart" class="hrt"></i>
-                        <i class="fa-regular fa-eye" class="eye"></i>
-                    </div>
-                </div>
-                <div class="card_body">
-                    <h3 class="card_title">1000 Chairs</h3>
-                    <p class="price">₹999</p>
-                    <div class="ratings">
-                        <div class="rating_stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="rating_numbers">(180)</p>
-                    </div>
-                    <button class="add_cart"
-                    product_number="P5"
-                    product_name="1000 Chairs"
-                    product_image="Products/P5.jpg"
-                    product_price="999"
-                    >Add to Cart</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card_area">
-                    <img src="Products/P6.jpg" alt="" class="card_image">
-                    <div class="card_icons">
-                        <i class="fa-regular fa-heart" class="hrt"></i>
-                        <i class="fa-regular fa-eye" class="eye"></i>
-                    </div>
-                </div>
-                <div class="card_body">
-                    <h3 class="card_title">Max Protien</h3>
-                    <p class="price">₹2950</p>
-                    <div class="ratings">
-                        <div class="rating_stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="rating_numbers">(653)</p>
-                    </div>
-                    <button class="add_cart"
-                    product_number="P6"
-                    product_name="Max Protien"
-                    product_image="Products/P6.jpg"
-                    product_price="2950"
-                    >Add to Cart</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card_area">
-                    <img src="Products/P7.jpg" alt="" class="card_image">
-                    <div class="card_icons">
-                        <i class="fa-regular fa-heart" class="hrt"></i>
-                        <i class="fa-regular fa-eye" class="eye"></i>
-                    </div>
-                </div>
-                <div class="card_body">
-                    <h3 class="card_title">Lumix 3200L </h3>
-                    <p class="price">₹35,299</p>
-                    <div class="ratings">
-                        <div class="rating_stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="rating_numbers">(1266)</p>
-                    </div>
-                    <button class="add_cart"
-                    product_number="P7"
-                    product_name="Lumix 3200L"
-                    product_image="Products/P7.jpg"
-                    product_price="35,299"
-                    >Add to Cart</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card_area">
-                    <img src="Products/P8.jpg" alt="" class="card_image">
-                    <div class="card_icons">
-                        <i class="fa-regular fa-heart" class="hrt"></i>
-                        <i class="fa-regular fa-eye" class="eye"></i>
-                    </div>
-                </div>
-                <div class="card_body">
-                    <h3 class="card_title">Nike Men's Jorfan</h3>
-                    <p class="price">₹7999</p>
-                    <div class="ratings">
-                        <div class="rating_stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="rating_numbers">(760)</p>
-                    </div>
-                    <button class="add_cart"
-                    product_number="P8"
-                    product_name="Nike Men's Jorfan"
-                    product_image="Products/P8.jpg"
-                    product_price="7999"
-                    >Add to Cart</button>
-                </div>
-            </div>
-        </div>
-        <div class="btn">
-            <a href="#" class="btn_a">View More</a>
+        <div id="products_list">
         </div>
     </section>
 
     <!-- Services -->
-    <section class="section">
-        <div class="container official_services" >
+    <section class="max_width_114rem padding_inline_7vmin">
+        <div class="container_basic official_services" >
             <div class="service">
                 <i class="fa-solid fa-truck-fast fa-3x" style="color: #000000;" class="img_service"></i>
                 <h3 class="title_service">FREE DELIVERY</h3>
@@ -364,41 +104,35 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container footer_container">
-            <div class="footer_items">
-                <h3 class="footer_title">Know Us</h3>
+        <div class="max_width_114rem footer_container">
+            <div>
+                <h3 class="footer_title">Details</h3>
                 <ul class="footer_list">
-                    <li class="li footer_itm">Your Account</li>
-                    <li class="li footer_itm">Your Orders</li>
-                    <li class="li footer_itm">문의</li>
+                    <a href="Legal_information/terms_of_use_kr.html"><li class="footer_itm">Terms of Use</li></a>
+                    <a href="Legal_information/privacy_policy_kr.html"><li class="footer_itm">Privacy Policies</li></a>
+                </ul>
+            </div>
+            <div class="footer_items">
+                <h3 class="footer_title">company info</h3>
+                <ul class="footer_list">
+                    <li class="li footer_itm">Company : VeriMedi .LLC</li>
+                    <li class="li footer_itm"></li>
+                    <li class="li footer_itm"></li>
+                    <li class="li footer_itm">Contact Us: verimedirx@protonmail.com</li>
                 </ul>
             </div>
             <div class="footer_items">
                 <h3 class="footer_title">Support</h3>
                 <ul class="footer_list">
-                    <li class="li footer_itm">VeriMediRX .LLC</li>
-                    <li class="li footer_itm">unishop@gmail.com</li>
-                    <li class="li footer_itm">+82 3669578123</li>
+                    <li class="li footer_itm">고객센터</li>
+                    <li class="li footer_itm"></li>
+                    <li class="li footer_itm"></li>
                 </ul>
             </div>
-            <div class="footer_items">
-                <h3 class="footer_title">Earn for us</h3>
-                <ul class="footer_list">
-                    <li class="li footer_itm">Run ads on Product</li>
-                    <li class="li footer_itm">See More Make Money with Us</li>
-                </ul>
-            </div>
-            <div class="footer_items">
-                <h3 class="footer_title">Help</h3>
-                <ul class="footer_list">
-                    <li class="li footer_itm">Services</li>
-                    <li class="li footer_itm">Policies</li>
-                    <li class="li footer_itm">Shipping Rates</li>
-                </ul>
-            </div>
+            
         </div>
         <div class="bottom">
-            <div class="container bottom_container">
+            <div class="container_basic bottom_container">
                 <p class="copyright">
                     © Copyright VeriMediRX 2026. All rights reserved
                 </p>
@@ -406,8 +140,10 @@
         </div>
     </footer>
 
+    <div id="adding_cart">Added to cart!</div>
+
     <!--Linking JS file-->
-    <script src="./index.js"></script>
+    <script src="./index.js" defer></script>
     
 
 </body>
