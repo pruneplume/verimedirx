@@ -2,11 +2,11 @@
 const supabaseUrl = 'https://zqhjkuugezjcpnfxppfw.supabase.co';
 const supabaseKey = 'sb_secret_d2_mriOj7DnWKjoxuFmJKw_Qg60aqR6';
 const supabaseKey_public = 'sb_publishable_UDQfHrnG5GTfoMgsfHSzpg_y00vskdY';
-const supabase = supabase.reateClient(supabaseUrl, supabaseKey);
+const supabasecmd = supabase.createClient(supabaseUrl, supabaseKey);
 
 async function gettable() {
   // PHP의 "SELECT * FROM users"와 같은 역할입니다.
-  let { data: data, error } = await supabase
+  let { data: data, error } = await supabasecmd
     .from('test1')
     .select('*')
 
